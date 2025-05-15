@@ -44,6 +44,13 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  .iframe-container {
+      width: 100%;
+      height: 500px;
+      border: 1px solid #ccc;
+      overflow: hidden;
+    }
+
   h1 {
     font-size: 3.125rem;
     color: var(--gray-900);
@@ -207,9 +214,18 @@
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
-     <button class="pill" (click)="triggerAction()">
-      Trigger
-     </button>
+       <div class="iframe-container">
+      <iframe
+        #iframeElement
+          src="https://zippy-profiterole-e399cd.netlify.app/"
+        width="100%"
+        height="100%"
+        [title]="iframeTitle"
+        frameBorder="0"
+        referrerpolicy="no-referrer"
+        sandbox="allow-scripts allow-same-origin allow-forms"
+      ></iframe>
+    </div>
     </div>
   </div>
 </main>
