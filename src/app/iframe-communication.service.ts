@@ -1,5 +1,5 @@
 
-import { Injectable, OnDestroy, inject } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subject, filter, fromEvent, map, takeUntil } from 'rxjs';
 
 export interface IframeMessage {
@@ -7,7 +7,6 @@ export interface IframeMessage {
   payload: any;
   source?: string;
 }
-
 
 @Injectable({
   providedIn: 'root'
