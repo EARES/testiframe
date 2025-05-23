@@ -48,4 +48,14 @@ export class AppComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+   triggerAction() {
+    window.parent.postMessage(
+      {
+        type: 'aksiyon',
+        data: { id: 123, txt: 'success' },
+      },
+      '*'
+    );
+  }
 }
