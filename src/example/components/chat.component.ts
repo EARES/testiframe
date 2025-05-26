@@ -4,6 +4,8 @@ import {
   effect,
   ElementRef,
   ViewChild,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -105,7 +107,7 @@ import { RouterLink } from '@angular/router';
           <button
             type="submit"
             [disabled]="!messageInput().trim() || chatService.state().isTyping"
-            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            class="px-4 py-2 bg-blue-500 text-white cursor-pointer rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             Send
           </button>
@@ -117,6 +119,7 @@ import { RouterLink } from '@angular/router';
 export class ChatComponent {
   @ViewChild('messagesContainer') messagesContainer!: ElementRef;
   @ViewChild('messageInputRef') messageInputRef!: ElementRef;
+  @Output() showWeatherRequest = new EventEmitter<{ show: boolean}>();
 
   readonly MessageSender = MessageSender;
   messageInput = signal('');
@@ -138,6 +141,9 @@ export class ChatComponent {
     await this.chatService.sendMessage(message);
     this.messageInput.set('');
     this.messageInputRef.nativeElement.focus();
+    this.showWeatherRequest.emit({
+      show: true,
+    });
   }
 
   getMessageClasses(sender: MessageSender): string {
